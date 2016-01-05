@@ -17,7 +17,6 @@ var Coordinate = (function () {
         this.accuracy = accuracy;
         this.altitude = altitude;
         this.altitudeAccuracy = altitudeAccuracy;
-        console.log(latitude);
     }
     return Coordinate;
 })();

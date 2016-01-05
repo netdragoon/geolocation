@@ -28,9 +28,8 @@ class GeoOptions implements IGeoOptions
 
 class Coordinate implements ICoordinate
 {    
-    constructor(public latitude: number, public longitude: number, public accuracy: number, public altitude: number, public altitudeAccuracy: number)
-    {     
-        console.log(latitude);   
+    constructor(public latitude?: number, public longitude?: number, public accuracy?: number, public altitude?: number, public altitudeAccuracy?: number)
+    {    
     }
 }
 
@@ -84,4 +83,4 @@ class GeoLocation implements IGeoLocation
 }
 
 var options = new GeoOptions(true, Infinity, 0);
-var geoLocation = new GeoLocation( options );
+var geoLocation = new GeoLocation(options);
