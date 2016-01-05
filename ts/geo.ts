@@ -11,7 +11,7 @@ interface ICoordinate
     longitude: number;
     accuracy: number;
     altitude: number;
-    altitudeAccuracy: number;
+    altitudeAccuracy: number;            
 }
 
 interface IGeoLocation
@@ -27,9 +27,10 @@ class GeoOptions implements IGeoOptions
 }
 
 class Coordinate implements ICoordinate
-{
+{    
     constructor(public latitude: number, public longitude: number, public accuracy: number, public altitude: number, public altitudeAccuracy: number)
-    {        
+    {     
+        console.log(latitude);   
     }
 }
 
@@ -43,8 +44,7 @@ class GeoLocation implements IGeoLocation
     {        
         if (navigator.geolocation) 
         {        
-            //navigator.geolocation.getCurrentPosition(this.success, this.errors, this.options);            
-            navigator.geolocation.watchPosition(this.success, this.errors, this.options);
+            navigator.geolocation.getCurrentPosition(this.success, this.errors, this.options);           
         }
     }
     
@@ -83,6 +83,5 @@ class GeoLocation implements IGeoLocation
     
 }
 
-var options = new GeoOptions();
+var options = new GeoOptions(true, Infinity, 0);
 var geoLocation = new GeoLocation( options );
-console.log( geoLocation.coordinate );

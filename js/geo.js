@@ -17,6 +17,7 @@ var Coordinate = (function () {
         this.accuracy = accuracy;
         this.altitude = altitude;
         this.altitudeAccuracy = altitudeAccuracy;
+        console.log(latitude);
     }
     return Coordinate;
 })();
@@ -26,7 +27,6 @@ var GeoLocation = (function () {
         this.options = options;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.success, this.errors, this.options);
-            //navigator.geolocation.watchPosition(this.success, this.errors, this.options);
         }
     }
     GeoLocation.prototype.success = function (position) {
@@ -57,6 +57,5 @@ var GeoLocation = (function () {
     return GeoLocation;
 })();
 
-var options = new GeoOptions();
+var options = new GeoOptions(true, Infinity, 0);
 var geoLocation = new GeoLocation(options);
-console.log(geoLocation.coordinate);
