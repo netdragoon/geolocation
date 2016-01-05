@@ -1,0 +1,28 @@
+{
+  "name": "geo",
+  "description": "HTML5 Geolocation",
+  "main": "index.js",
+  "authors": [
+    "Canducci"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "HTML5",
+    "Geolocation"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
