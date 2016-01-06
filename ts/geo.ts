@@ -41,46 +41,25 @@ class GeoLocation implements IGeoLocation
     
     constructor(public options: IGeoOptions)
     {        
-        if (navigator.geolocation) 
+        if (!navigator.geolocation) 
         {        
-            navigator.geolocation.getCurrentPosition(this.success, this.errors, this.options);           
+                    
         }
     }
     
-    success(position)
+    call(success_callBack, errors_callBack = null)
     {   
-        this.coordinate = new Coordinate(position.coords.latitude,position.coords.longitude,position.coords.accuracy,position.coords.altitude, position.coords.altitudeAccuracy);
-        console.log(this.coordinate);        
+        navigator.geolocation.getCurrentPosition(success_callBack, errors_callBack, this.options);
     }
-    
-    errors(error)  
-    {  
-        switch (error.code)  
-        {  
-            case error.PERMISSION_DENIED: 
-                {
-                    alert("User denied the request");  
-                    break;  
-                }
-            case error.POSITION_UNAVAILABLE: 
-                {
-                    alert("Location information Not available.");  
-                    break;
-                }  
-            case error.TIMEOUT: 
-                {
-                    alert("Request time out");  
-                    break;
-                }  
-            case error.UNKNOWN_ERROR:
-                {
-                    alert("Unknown error ");
-                    break;    
-                }
-        }  
-    }   
     
 }
 
 var options = new GeoOptions(true, Infinity, 0);
 var geoLocation = new GeoLocation(options);
+
+geoLocation.call(function(position)
+{
+   var c = position.coords; 
+   var coordinate = new Coordinate(c.latitude, c.longitude, c.accuracy, c.altitude, c.altitudeAccuracy);
+   console.log(coordinate);
+});

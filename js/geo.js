@@ -24,37 +24,21 @@ var Coordinate = (function () {
 var GeoLocation = (function () {
     function GeoLocation(options) {
         this.options = options;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.success, this.errors, this.options);
+        if (!navigator.geolocation) {
         }
     }
-    GeoLocation.prototype.success = function (position) {
-        this.coordinate = new Coordinate(position.coords.latitude, position.coords.longitude, position.coords.accuracy, position.coords.altitude, position.coords.altitudeAccuracy);
-        console.log(this.coordinate);
-    };
-
-    GeoLocation.prototype.errors = function (error) {
-        switch (error.code) {
-            case error.PERMISSION_DENIED: {
-                alert("User denied the request");
-                break;
-            }
-            case error.POSITION_UNAVAILABLE: {
-                alert("Location information Not available.");
-                break;
-            }
-            case error.TIMEOUT: {
-                alert("Request time out");
-                break;
-            }
-            case error.UNKNOWN_ERROR: {
-                alert("Unknown error ");
-                break;
-            }
-        }
+    GeoLocation.prototype.call = function (success_callBack, errors_callBack) {
+        if (typeof errors_callBack === "undefined") { errors_callBack = null; }
+        navigator.geolocation.getCurrentPosition(success_callBack, errors_callBack, this.options);
     };
     return GeoLocation;
 })();
 
 var options = new GeoOptions(true, Infinity, 0);
 var geoLocation = new GeoLocation(options);
+
+geoLocation.call(function (position) {
+    var c = position.coords;
+    var coordinate = new Coordinate(c.latitude, c.longitude, c.accuracy, c.altitude, c.altitudeAccuracy);
+    console.log(coordinate);
+});
